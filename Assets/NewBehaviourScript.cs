@@ -10,7 +10,7 @@ public class NewBehaviourScript : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		if(Input.GetKeyDown(KeyCode.Space)){
+		if(Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.A)){
 		    transform.position += new Vector3 (0,0,1 );
 		}
 	
