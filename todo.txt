@@ -1,0 +1,6 @@
+-- Kinect --
+*Använd punkdata för att positionera en karaktär
+*Använd punkdata för att sikta
+
+-- Utility/Tools -- 
+*Skapa egen klass för animationer

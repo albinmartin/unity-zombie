@@ -41,7 +41,11 @@ TagManager:
     userID: 0
     uniqueID: 0
     locked: 0
-  - name: New Layer 1
+  - name: Zombies
     userID: 1
     uniqueID: 2796360879
+    locked: 0
+  - name: Players
+    userID: 2
+    uniqueID: 1742010813
     locked: 0

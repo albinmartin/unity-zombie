@@ -170,9 +170,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_SortingLayerID: 0
+  m_SortingLayer: 2
+  m_SortingOrder: 0
+  m_SortingLayerID: 1742010813
   m_Sprite: {fileID: 21300032, guid: 3685017e0686bd840a4b0da620df0121, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &547731860
@@ -182,7 +182,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 547731858}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.75489664, y: 1.82434583, z: 0}
+  m_LocalPosition: {x: 4.37509251, y: 1.24921358, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -268,6 +268,7 @@ GameObject:
   - 95: {fileID: 1074348243}
   - 114: {fileID: 1074348242}
   - 114: {fileID: 1074348246}
+  - 60: {fileID: 1074348247}
   m_Layer: 0
   m_Name: characters_0
   m_TagString: Untagged
@@ -318,9 +319,9 @@ SpriteRenderer:
   m_UseLightProbes: 0
   m_LightProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
-  m_SortingLayer: 0
+  m_SortingLayer: 1
   m_SortingOrder: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 2796360879
   m_Sprite: {fileID: 21300000, guid: 3685017e0686bd840a4b0da620df0121, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!4 &1074348245
@@ -330,7 +331,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1074348241}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.85148001, y: 1.85717189, z: 0}
+  m_LocalPosition: {x: 3.76632524, y: 1.0216037, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -345,6 +346,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 482e28c56105a9d4fadf9180fa97e222, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!60 &1074348247
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1074348241}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Poly:
+    m_Paths:
+    - - {x: .275000006, y: .00499999989}
+      - {x: .275000006, y: .155000001}
+      - {x: .0949999988, y: .375}
+      - {x: -.194999993, y: .375}
+      - {x: -.275000006, y: .164999992}
+      - {x: -.275000006, y: -.104999997}
+      - {x: -.24499999, y: -.375}
+      - {x: .164999992, y: -.375}
+      - {x: .275000006, y: -.275000006}
+      - {x: .275000006, y: -.185000002}
+      - {x: .13499999, y: -.0549999997}
 --- !u!1 &1582612877
 GameObject:
   m_ObjectHideFlags: 0

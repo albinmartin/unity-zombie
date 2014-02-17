@@ -78,7 +78,7 @@ public class KinectPointController : MonoBehaviour {
 	//private Vector4[] _bonePos; //internal handle for the bone positions from the kinect
 	
 	public int player;
-	public BoneMask Mask = BoneMask.All;
+	public BoneMask Mask = BoneMask.Torso;
 	
 	public float scale = 1.0f;
 	
