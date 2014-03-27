@@ -1,6 +1,18 @@
 -- Kinect --
-*Använd punkdata för att positionera en karaktär
-*Använd punkdata för att sikta
+*Karaktärsobjekt
+ - Kropp
+ - Armar
+
+*Skapa armobjekt
+Members:
+ - Vektor från armbåge till hand
+
+Functions:
+ +absoluteAngle() - Vinkeln mellan y och armhand-vektorn i wolrdcoordinater. 
+		För att kunna spawna kulor åt rätt håll.
+
+ +isShooting() - Jämför armhandvektorn mot Y-axeln (i 3d-space)
+		för att se om man håller upp vapnet.
 
 -- Utility/Tools -- 
 *Skapa egen klass för animationer
