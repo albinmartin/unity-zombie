@@ -13,7 +13,7 @@ public class ArmMovement : LimbMovement {
 	private float bulletSpeed = 100.0f;
 	private int cooldownInSec = 1;
 	private float timeStamp;
-	private float weaponRange;
+	private float weaponRange = 60;
 
 	public bool IsShooting {
 		get {
@@ -66,7 +66,7 @@ public class ArmMovement : LimbMovement {
 		foreach (GameObject enemy in enemies) {
 			t = enemy.GetComponent<Transform>();
 			toEnemy = t.position - AbsolutePosition;
-			if(Vector3.Angle(arm, toEnemy) < 30)
+			if(Vector3.Angle(arm, toEnemy) < 50)
 			{
 				if(closestEnemyDir.magnitude > toEnemy.magnitude)
 					closestEnemyDir = toEnemy;
@@ -98,7 +98,13 @@ public class ArmMovement : LimbMovement {
 	}
 
 	protected  override void calcPosition(){
-		base.calcPosition ();
+		//base.calcPosition ();
+		Vector3 pos = sw.bonePos[0, (int)Limb.HipCenter] - sw.bonePos [0, (int)limb] ;
+		worldCoord = new Vector3(-pos.x, -pos.z, 0);
+		if (!(float.IsNaN(pos.x) && float.IsNaN(pos.y) && float.IsNaN(pos.z))){
+			this.transform.position = this.transform.parent.position + worldCoord*movementScale;
+		}
+
 		createArm (whichArm);
 	}
 	
@@ -108,7 +114,7 @@ public class ArmMovement : LimbMovement {
 		//Calculate if holding arms "orthogonal" to the body
 		if (arm != null) {
 			float angle = Vector3.Angle(arm, Vector3.down);		
-			if(angle > 70)
+			if(angle > 40)
 			{
 				isShooting = true;
 			}

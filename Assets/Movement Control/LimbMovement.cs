@@ -4,7 +4,7 @@ using System.Collections;
 public class LimbMovement : MonoBehaviour {
 
 	public SkeletonWrapper sw;
-	public int movementScale = 10;
+	public int movementScale = 100;
 	protected Vector3 worldCoord;
 	public bool trackRotation = true;
 
@@ -21,7 +21,7 @@ public class LimbMovement : MonoBehaviour {
 
 	void Start () {
 		worldCoord = new Vector3 (0, 0, 0);
-		//movementScale = 10;
+		movementScale = 30;
 	}
 
 	public virtual void Update () {
@@ -36,7 +36,7 @@ public class LimbMovement : MonoBehaviour {
 		worldCoord = new Vector3(pos.x, pos.z, 0);
 		//transform.Translate(worldCoord*movementScale, Space.Self);
 		if (!(float.IsNaN(pos.x) && float.IsNaN(pos.y) && float.IsNaN(pos.z))){
-			this.transform.position = worldCoord*movementScale;
+				this.transform.position = worldCoord*movementScale;
 		}
 	}
 	
@@ -47,7 +47,7 @@ public class LimbMovement : MonoBehaviour {
 			if(this.renderer != null) //So we can apply script to nonvisible objects
 				center = this.renderer.bounds.center;
 
-			this.transform.localRotation = Quaternion.identity;
+			this.transform.rotation = Quaternion.identity;
 			this.transform.RotateAround(center, Vector3.forward, sw.boneAbsoluteOrientation[0, (int)limb].eulerAngles.y);
 		}
 	}

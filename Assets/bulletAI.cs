@@ -18,4 +18,14 @@ public class bulletAI : MonoBehaviour {
 			//kill*/
 	
 	}
+
+	void OnCollisionEnter2D(Collision2D collision){
+		if(collision.gameObject.tag == "Enemy")
+		{
+			hitpoints hp = collision.gameObject.GetComponent<hitpoints>();
+			if(hp != null)
+				hp.Hit(1);
+		}
+		Destroy (this.gameObject);
+	}
 }

@@ -1,11 +1,13 @@
-﻿using UnityEngine;
+﻿
+using UnityEngine;
 using System.Collections;
 
 public class spawner : MonoBehaviour {
 
 	public Transform unit;
-	private float timeStamp;
+	public float timeStamp;
 	public float cooldownInSec = 3;
+	public int hitpoints = 5;
 	void Start () {
 		timeStamp = 0;
 	}
@@ -15,9 +17,13 @@ public class spawner : MonoBehaviour {
 		/*if (Input.GetKey (KeyCode.Q)) {
 			Instantiate(unit, this.transform.position, Quaternion.identity);
 		}*/
-		if (timeStamp <= Time.time) {
+		if (timeStamp <= Random.Range(Time.time-1, Time.time+1)) {
 			timeStamp = Time.time + cooldownInSec;
 			Instantiate(unit, this.transform.position, Quaternion.identity);
+			hitpoints--;
+		}
+		if (hitpoints <= 0) {
+			Destroy(this);		
 		}
 	}
 }
