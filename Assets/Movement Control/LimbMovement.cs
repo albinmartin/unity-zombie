@@ -4,7 +4,7 @@ using System.Collections;
 public class LimbMovement : MonoBehaviour {
 
 	public SkeletonWrapper sw;
-	public int movementScale = 100;
+	public int movementScale = 30;
 	protected Vector3 worldCoord;
 	public bool trackRotation = true;
 
@@ -21,7 +21,6 @@ public class LimbMovement : MonoBehaviour {
 
 	void Start () {
 		worldCoord = new Vector3 (0, 0, 0);
-		movementScale = 30;
 	}
 
 	public virtual void Update () {

@@ -16,8 +16,8 @@ public class levelManager : MonoBehaviour {
 		switch (difficulty) {
 		case Difficulty.Easy:
 			cooldown = 6;
-			newSpawnCooldown = 15;
-			numSpawners = 4;
+			newSpawnCooldown = 16;
+			numSpawners = 1;
 			break;
 		case Difficulty.Medium:
 			cooldown = 4;
@@ -47,16 +47,17 @@ public class levelManager : MonoBehaviour {
 
 	void Update () {
 
-		if (numSpawners > 0 && timestamp <= Time.time) {
+		if (numSpawners > 0 && timestamp <= Time.time && spawnPositions.Length > 0) {
 			timestamp = Time.time + newSpawnCooldown;
 			spawner = (GameObject)Instantiate(Resources.Load("Prefabs/Spawner")); 
 			//Position at spawnpoint
 			spawner.transform.position = getRndPosition();
 			spawner.GetComponent<spawner>().cooldownInSec = cooldown;
+			spawner.tag = "Spawner";
 
 			numSpawners--;
 		}
-		else if(numSpawners <= 0 && GameObject.FindGameObjectsWithTag ("Enemy").Length <= 0){
+		else if(GameObject.FindGameObjectsWithTag ("Spawner").Length <= 0 && GameObject.FindGameObjectsWithTag ("Enemy").Length <= 0){
 			//Display level complete
 			//Change level
 			Application.LoadLevel (levelID+1);
@@ -65,9 +66,12 @@ public class levelManager : MonoBehaviour {
 
 	private Vector3 getRndPosition()
 	{
-		int index = (int)Random.Range (0, spawnPositions.Length-1);
-		int x = (int)Random.Range (spawnPositions [index].x, spawnPositions [index].x + spawnPositions [index].width);
-		int y = (int)Random.Range (spawnPositions [index].y, spawnPositions [index].y + spawnPositions [index].height);
+		Random.seed = ((int)Time.time);
+		int index = (int)Random.Range (0, spawnPositions.Length);
+		System.Random rn = new System.Random();
+		index = rn.Next(0,spawnPositions.Length);
+		int x = (int)rn.Next ((int)spawnPositions [index].x, (int)spawnPositions [index].x + (int)spawnPositions [index].width);
+		int y = (int)rn.Next ((int)spawnPositions [index].y, (int)spawnPositions [index].y + (int)spawnPositions [index].height);
 		return new Vector3 (x, y, 0);
 	}
 }

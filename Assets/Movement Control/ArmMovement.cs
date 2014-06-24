@@ -5,7 +5,7 @@ public class ArmMovement : LimbMovement {
 
 	public enum WhichArm { LEFT, RIGHT }
 	public WhichArm whichArm = WhichArm.RIGHT;
-	private Vector3 arm;
+	private Vector3 armRealCoord, armGameCoord;
 	
 	//Weapon
 	private bool isShooting;
@@ -53,7 +53,7 @@ public class ArmMovement : LimbMovement {
 		if (dir.magnitude < weaponRange) {
 			Rigidbody2D bulletClone = (Rigidbody2D)Instantiate (bullet, this.transform.position, transform.rotation);
 			dir.Normalize();
-			bulletClone.velocity = new Vector2 (dir.x, dir.z) * bulletSpeed;
+			bulletClone.velocity = new Vector2 (dir.x, dir.y) * bulletSpeed;
 		}
 	}
 
@@ -66,7 +66,10 @@ public class ArmMovement : LimbMovement {
 		foreach (GameObject enemy in enemies) {
 			t = enemy.GetComponent<Transform>();
 			toEnemy = t.position - AbsolutePosition;
-			if(Vector3.Angle(arm, toEnemy) < 50)
+			float distCorrection =  Mathf.Clamp01(weaponRange - toEnemy.magnitude / weaponRange);
+			toEnemy.z = 0;
+			armGameCoord.z = 0;
+			if(Vector3.Dot(armGameCoord.normalized, toEnemy.normalized) > 0.8f) //Mathf.Clamp(0.80f/distCorrection, 0.9f, 0.6f))
 			{
 				if(closestEnemyDir.magnitude > toEnemy.magnitude)
 					closestEnemyDir = toEnemy;
@@ -82,14 +85,16 @@ public class ArmMovement : LimbMovement {
 			sampleArm = sw.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandLeft] - sw.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowLeft];
 			if (!(float.IsNaN(sampleArm.x) && float.IsNaN(sampleArm.y) && float.IsNaN(sampleArm.z))){
 				sampleArm.Normalize();
-				arm = sampleArm;
+				armRealCoord = sampleArm;
+				armGameCoord = new Vector3(sampleArm.x, sampleArm.z, sampleArm.y);
 			}
 			break;
 		case WhichArm.RIGHT:
 			sampleArm = sw.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.HandRight] - sw.bonePos[0, (int)Kinect.NuiSkeletonPositionIndex.ElbowRight];
 			if (!(float.IsNaN(sampleArm.x) && float.IsNaN(sampleArm.y) && float.IsNaN(sampleArm.z))){
 				sampleArm.Normalize();
-				arm = sampleArm;
+				armRealCoord = sampleArm;
+				armGameCoord = new Vector3(sampleArm.x, sampleArm.z, sampleArm.y);
 			}
 			break;
 		default:
@@ -112,9 +117,10 @@ public class ArmMovement : LimbMovement {
 		base.calcRotation ();
 
 		//Calculate if holding arms "orthogonal" to the body
-		if (arm != null) {
-			float angle = Vector3.Angle(arm, Vector3.down);		
-			if(angle > 40)
+		if (armRealCoord != null) {
+			Vector3 arm = armRealCoord;
+			arm.x = 0;
+			if(Vector3.Dot(armRealCoord.normalized, new Vector3(0.0f,-1.0f, 0)) < 0.25f)
 			{
 				isShooting = true;
 			}
